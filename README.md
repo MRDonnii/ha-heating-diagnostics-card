@@ -2,6 +2,9 @@
 
 ![Preview](docs/preview.png)
 
+> HACS installs both JavaScript files automatically. For a manual installation,
+> copy `ha-heating-diagnostics-card.js` and `ha-card-list-editor.js` into the same folder.
+
 A Home Assistant Lovelace card that turns per-room heating diagnostics into
 an animated overview: valve-load gauge, a thermal-balance bar (learned heat
 gain vs. calculated heat loss), a learning-model progress bar while a room's
