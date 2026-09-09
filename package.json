@@ -1,0 +1,24 @@
+{
+  "name": "ha-heating-diagnostics-card",
+  "version": "0.1.2",
+  "description": "Home Assistant Lovelace card: animated per-room heating diagnostics — valve load, thermal balance, learning-model progress and deviation from a learned baseline.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MRDonnii/ha-heating-diagnostics-card.git"
+  },
+  "keywords": [
+    "home-assistant",
+    "home-assistant-card",
+    "custom-card",
+    "lovelace",
+    "lovelace-card",
+    "dashboard",
+    "heating",
+    "diagnostics",
+    "radiator",
+    "energy"
+  ],
+  "author": "John Thorn Halle",
+  "license": "MIT"
+}
