@@ -1,4 +1,5 @@
-const VERSION = "0.1.2";
+import "./ha-card-list-editor.js";
+const VERSION = "0.2.0";
 
 class HAHeatingDiagnosticsCard extends HTMLElement {
   constructor() {
@@ -10,6 +11,7 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
   }
 
   static getStubConfig() { return { title: "Varmeoptimering", rooms: [] }; }
+  static getConfigElement(){const e=document.createElement("ha-card-list-editor");e.definition={roots:[{key:"title",label:"Titel"},{key:"animation",label:"Animation",type:"boolean"},{key:"learning_hours",label:"Læringstimer",type:"entity"},{key:"total_demand",label:"Samlet varmebehov",type:"entity"},{key:"data_problem",label:"Dataproblem",type:"entity"}],collections:[{key:"rooms",label:"Rumdiagnose",itemLabel:"rum",defaults:{name:"Nyt rum",icon:"mdi:radiator"},fields:[{key:"name",label:"Navn"},{key:"icon",label:"Ikon"},{key:"climate",label:"Termostat",type:"entity"},{key:"valve",label:"Ventil",type:"entity"},{key:"output",label:"Output",type:"entity"},{key:"hours",label:"Læringstimer",type:"entity"},{key:"loss",label:"Varmetab",type:"entity"},{key:"heating_power",label:"Varmeeffekt",type:"entity"},{key:"utilisation",label:"Udnyttelse",type:"entity"},{key:"cost",label:"Pris",type:"entity"},{key:"share",label:"Varmeandel",type:"entity"},{key:"rated",label:"Radiatorstørrelse",type:"entity"},{key:"area",label:"Rumareal",type:"entity"},{key:"demand_status",label:"Behovsstatus",type:"entity"},{key:"stressed",label:"Belastning",type:"entity"}]}]};return e;}
 
   setConfig(config) {
     if (!config || !Array.isArray(config.rooms)) throw new Error("Varmeoptimering kræver en rooms-liste");

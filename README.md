@@ -116,3 +116,5 @@ Clicking a room card (or its **Se diagnosedata** button) opens the
 ## License
 
 MIT — see [LICENSE](LICENSE).
+The visual card editor provides entity pickers and add/remove controls for rooms
+and diagnostic sensors.
