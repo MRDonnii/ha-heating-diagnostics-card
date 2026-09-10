@@ -1,6 +1,6 @@
 {
   "name": "ha-heating-diagnostics-card",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Home Assistant Lovelace card: animated per-room heating diagnostics — valve load, thermal balance, learning-model progress and deviation from a learned baseline.",
   "type": "module",
   "repository": {
