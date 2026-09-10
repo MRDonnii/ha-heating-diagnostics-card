@@ -1,5 +1,5 @@
 import "./ha-card-list-editor.js";
-const VERSION = "0.2.2";
+const VERSION = "0.2.3";
 
 class HAHeatingDiagnosticsCard extends HTMLElement {
   constructor() {
@@ -158,8 +158,8 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
     const health = globalProblem ? "Dataproblem" : problems ? `${problems} bør ses efter` : learning ? "Systemet lærer" : "Alle rum normale";
     const noAnimation = this._config.animation === false ? "no-animation" : "";
     this.shadowRoot.innerHTML = `<style>
-      :host{display:block;--good:var(--dashboard-success, var(--success-color, #54d29b));--learn:#64a9ff;--warn:var(--dashboard-warning, var(--warning-color, #ffc45c));--bad:var(--dashboard-danger, var(--error-color, #ff667a));--heat:#ff8a3d;--edge:var(--dashboard-border-neutral, var(--divider-color, rgba(255,255,255,.11)))}*{box-sizing:border-box}
-      ha-card{overflow:hidden;border-radius:24px;background:linear-gradient(145deg,color-mix(in srgb,var(--surface,var(--ha-card-background)) 94%,#152338 6%),var(--ha-card-background));color:var(--primary-text-color);box-shadow:var(--ha-card-box-shadow)}
+      :host{display:block;--good:var(--dashboard-success, var(--success-color, #54d29b));--learn:#64a9ff;--warn:var(--dashboard-warning, var(--warning-color, #ffc45c));--bad:var(--dashboard-danger, var(--error-color, #ff667a));--heat:#ff8a3d;--edge:var(--dashboard-border-neutral, var(--divider-color, rgba(255,255,255,.11)));--card-surface:var(--dashboard-card-bg,var(--surface,var(--ha-card-background,var(--card-background-color,#111820))))}*{box-sizing:border-box}
+      ha-card{overflow:hidden;border-radius:24px;background:var(--card-surface);color:var(--primary-text-color);box-shadow:var(--ha-card-box-shadow)}
       .shell{position:relative;padding:22px;isolation:isolate}.backdrop{position:absolute;inset:-15%;z-index:-1;background:radial-gradient(circle at 8% 0,rgba(100,169,255,.17),transparent 26%),radial-gradient(circle at 95% 8%,rgba(255,138,61,.16),transparent 28%);pointer-events:none}
       header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--secondary-text-color);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.eyebrow i{width:7px;height:7px;border-radius:50%;background:${problems || globalProblem ? "var(--bad)" : learning ? "var(--learn)" : "var(--good)"};box-shadow:0 0 13px currentColor;animation:pulse 1.8s ease-in-out infinite}h2{margin:5px 0 0;font-size:25px;line-height:1.08;letter-spacing:-.035em}
       .overview{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.overview>div{min-width:88px;padding:9px 12px;border:1px solid var(--edge);border-radius:14px;background:rgba(0,0,0,.08)}.overview span{display:block;color:var(--secondary-text-color);font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.overview strong{display:block;margin-top:3px;font-size:16px}.overview .health strong{color:${problems || globalProblem ? "var(--bad)" : learning ? "var(--learn)" : "var(--good)"}}
