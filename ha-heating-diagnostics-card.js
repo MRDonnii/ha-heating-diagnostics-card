@@ -1,5 +1,5 @@
 import "./ha-card-list-editor.js";
-const VERSION = "0.4.1";
+const VERSION = "0.4.2";
 
 class HAHeatingDiagnosticsCard extends HTMLElement {
   constructor() {
@@ -158,6 +158,7 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
     const health = globalProblem ? "Dataproblem" : problems ? `${problems} bør ses efter` : learning ? "Systemet lærer" : "Alle rum normale";
     const noAnimation = this._config.animation === false ? "no-animation" : "";
     const compact = this._config.compact === true;
+    const compactCols = Math.max(1, Math.ceil(rooms.length / 2));
     this.shadowRoot.innerHTML = `<style>
       :host{display:block;--good:var(--dashboard-success, var(--success-color, #54d29b));--learn:#64a9ff;--warn:var(--dashboard-warning, var(--warning-color, #ffc45c));--bad:var(--dashboard-danger, var(--error-color, #ff667a));--heat:#ff8a3d;--accent:var(--dashboard-accent, var(--info-color, #38bdf8));--edge:var(--dashboard-border-neutral, var(--divider-color, rgba(255,255,255,.11)));--card-surface:var(--dashboard-card-bg,var(--surface,var(--ha-card-background,var(--card-background-color,#111820))))}*{box-sizing:border-box}
       ha-card{overflow:hidden;border-radius:24px;background:var(--card-surface);color:var(--primary-text-color);box-shadow:var(--ha-card-box-shadow)}
@@ -177,14 +178,15 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
       @media(max-width:760px){.shell{padding:15px}header{display:block}.overview{justify-content:flex-start;margin-top:12px}.overview>div{flex:1}.room-grid{grid-template-columns:1fr}.flow-node small{display:none}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
       @media(max-width:420px){.flow-node.model{display:none}.live-panel{grid-template-columns:82px 1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
       @media(prefers-reduced-motion:reduce){*{animation:none!important}}
-      .room-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start}
+      .room-grid.compact{grid-template-columns:repeat(var(--compact-cols,4),minmax(0,1fr));align-items:start}
       .room.compact{zoom:.62}
+      @media(max-width:900px){.room-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
     </style><ha-card class="${noAnimation}"><div class="shell"><div class="backdrop"></div>
       <header><div><div class="eyebrow"><i></i>Rumdiagnose i realtid</div><h2>${this._escape(this._config.title)}</h2></div><div class="overview">
         <div class="health"><span>Systemstatus</span><strong>${health}</strong></div><div><span>Aktive rum</span><strong>${active} / ${rooms.length}</strong></div><div><span>Varmebehov</span><strong>${this._format(total)} W</strong></div>
       </div></header>
       <div class="flow"><div class="flow-line"></div><div class="flow-node source"><ha-icon icon="mdi:radiator"></ha-icon><div><small>Målinger</small><strong>${active} aktive</strong></div></div><div class="flow-node model"><ha-icon icon="mdi:brain"></ha-icon><div><small>Læringsmodel</small><strong>${learning} lærer</strong></div></div><div class="flow-node rooms"><ha-icon icon="mdi:shield-check"></ha-icon><div><small>Diagnose</small><strong>${problems || globalProblem ? "Kræver blik" : "Overvåger"}</strong></div></div></div>
-      <div class="room-grid ${compact ? "compact" : ""}">${rooms.map((room,index)=>this._room(room,index,compact)).join("")}</div>
+      <div class="room-grid ${compact ? "compact" : ""}" style="${compact ? `--compact-cols:${compactCols}` : ""}">${rooms.map((room,index)=>this._room(room,index,compact)).join("")}</div>
     </div></ha-card>`;
     this.shadowRoot.querySelectorAll(".details").forEach((button) => button.addEventListener("click", (event) => { event.stopPropagation(); this._open(button.dataset.entity); }));
     this.shadowRoot.querySelectorAll("article.room").forEach((article) => {
