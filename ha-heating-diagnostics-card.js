@@ -1,5 +1,5 @@
 import "./ha-card-list-editor.js";
-const VERSION = "0.4.2";
+const VERSION = "0.4.3";
 
 class HAHeatingDiagnosticsCard extends HTMLElement {
   constructor() {
@@ -35,7 +35,7 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
     this._render();
   }
 
-  getCardSize() { return this._config.compact ? 11 : 14; }
+  getCardSize() { return this._config.compact ? 13 : 14; }
   getGridOptions() { return { rows: "auto", columns: 12, min_columns: 6 }; }
 
   _entity(id) {
@@ -158,7 +158,7 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
     const health = globalProblem ? "Dataproblem" : problems ? `${problems} bør ses efter` : learning ? "Systemet lærer" : "Alle rum normale";
     const noAnimation = this._config.animation === false ? "no-animation" : "";
     const compact = this._config.compact === true;
-    const compactCols = Math.max(1, Math.ceil(rooms.length / 2));
+    const compactCols = Math.max(1, Math.ceil(rooms.length / 3));
     this.shadowRoot.innerHTML = `<style>
       :host{display:block;--good:var(--dashboard-success, var(--success-color, #54d29b));--learn:#64a9ff;--warn:var(--dashboard-warning, var(--warning-color, #ffc45c));--bad:var(--dashboard-danger, var(--error-color, #ff667a));--heat:#ff8a3d;--accent:var(--dashboard-accent, var(--info-color, #38bdf8));--edge:var(--dashboard-border-neutral, var(--divider-color, rgba(255,255,255,.11)));--card-surface:var(--dashboard-card-bg,var(--surface,var(--ha-card-background,var(--card-background-color,#111820))))}*{box-sizing:border-box}
       ha-card{overflow:hidden;border-radius:24px;background:var(--card-surface);color:var(--primary-text-color);box-shadow:var(--ha-card-box-shadow)}
@@ -179,7 +179,7 @@ class HAHeatingDiagnosticsCard extends HTMLElement {
       @media(max-width:420px){.flow-node.model{display:none}.live-panel{grid-template-columns:82px 1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
       @media(prefers-reduced-motion:reduce){*{animation:none!important}}
       .room-grid.compact{grid-template-columns:repeat(var(--compact-cols,4),minmax(0,1fr));align-items:start}
-      .room.compact{zoom:.62}
+      .room.compact{zoom:.8}
       @media(max-width:900px){.room-grid.compact{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
     </style><ha-card class="${noAnimation}"><div class="shell"><div class="backdrop"></div>
       <header><div><div class="eyebrow"><i></i>Rumdiagnose i realtid</div><h2>${this._escape(this._config.title)}</h2></div><div class="overview">
